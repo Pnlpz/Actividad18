@@ -1,16 +1,27 @@
 class Table
+  attr_reader :table, :collects
 
   def initialize(table, *collects)
     @table = table
-    @collects = collects
+    @collects = collects.map(&:to_i)
   end
-  def read
+  def mayor(collects)
+  @collects.select { |coll| coll > collects } #Falta sacar el mayor valor...
+  end
 
-  end
+  def average
+   @collects.inject(&:+) / @collects.size
   end
 end
 
-File.open('casino.txt', 'r')
-mesas = file.readlines
-puts contents
-file.close
+mesas = []
+data = File.open('casino.txt', 'r', &:readlines)
+data.each do |lines|
+  ls = lines.split(', ')
+  mesas << Table.new(*ls)
+end
+
+#print mesas
+
+promedios = mesas.map(&:average)
+puts promedios.inject(&:+) / promedios.size
