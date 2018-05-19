@@ -5,12 +5,13 @@ class Table
     @table = table
     @collects = collects.map(&:to_i)
   end
-  def mayor(collects)
-  @collects.select { |coll| coll > collects } #Falta sacar el mayor valor...
+
+  def max(*)
+    @collects.max
   end
 
   def average
-   @collects.inject(&:+) / @collects.size
+   @collects.inject(&:+) / @collects.size(&:to_f)
   end
 end
 
@@ -25,3 +26,5 @@ end
 
 promedios = mesas.map(&:average)
 puts promedios.inject(&:+) / promedios.size
+
+puts mesas.map(&:max)
