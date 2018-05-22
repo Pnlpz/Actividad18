@@ -7,6 +7,18 @@ class Course
     @dates = dates.map { |date| Date.parse(date) }
   end
 
+def self.load_data
+  file = File.open('cursos.txt', 'r')
+  data = file.readlines
+  file.close
+  courses = []
+  data.each do |lines|
+    ls = lines.split(', ')
+    courses << Course.new(*ls)
+  end
+  courses
+end
+
   def courses_start(date_start)
     #raise ArgumentError.new('that date does not exist') if date_start
     @dates.select { |date| date < date_start }
@@ -17,13 +29,7 @@ class Course
   end
 end
 
-courses = []
-data = File.open('cursos.txt', 'r', &:readlines)
-data.each do |lines|
-  ls = lines.split(', ')
-  courses << Course.new(*ls)
-end
-#print courses
 
-print courses[1].courses_start(Date.today)
-print courses[0].courses_finish(Date.today)
+courses = Course.load_data
+
+# Incompleto

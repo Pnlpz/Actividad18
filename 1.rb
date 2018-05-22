@@ -28,3 +28,5 @@ promedios = mesas.map(&:average)
 puts promedios.inject(&:+) / promedios.size
 
 puts mesas.map(&:max)
+
+# Listo

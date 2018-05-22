@@ -10,3 +10,6 @@ class Roulette
 end
 
 r = (1..10).to_a
+
+
+# Terminar
