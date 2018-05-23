@@ -26,18 +26,20 @@ class Roulette
   end
 
 def self.numero_mayor
-  File.open('roulette_history.txt', 'r') { |file| data = file.readlines }
-  data.each do |num|
-    ls = prod.split(', ')
-
+  numeros = []
+  data = File.open('roulette_history.txt', 'r') { |file| file.readlines }
+  data.each do |v|
+    ls = v.split(', ')
+    numeros << ls
+  end
+  n = numeros.max_by { |i| numeros.count(i) }
+  print n
   end
 end
-end
-
-primer_numero = Roulette.new
-puts 'Ingresa un numero del 1 al 10'
-n = gets.chomp.to_i
-primer_numero.play(n)
-
+# primer_numero = Roulette.new
+# puts 'Ingresa un numero del 1 al 10'
+# n = gets.chomp.to_i
+# primer_numero.play(n)
+Roulette.numero_mayor
 
 # Terminar
